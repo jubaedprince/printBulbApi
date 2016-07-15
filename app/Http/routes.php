@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response('Welcome to Print Bulb API');
 });
+
+Route::resource('product', 'ProductController');
+Route::resource('subcategory', 'SubcategoryController');
+Route::resource('category', 'CategoryController');

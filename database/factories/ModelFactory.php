@@ -19,3 +19,32 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+$factory->define(App\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name
+    ];
+});
+
+
+$factory->define(App\Subcategory::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'category_id' => function () {
+            return factory(App\Category::class)->create()->id;
+        }
+    ];
+});
+
+
+$factory->define(App\Product::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'price' => $faker->numberBetween(100,1000),
+        'template' => $faker->text,
+        'subcategory_id' => function () {
+            return factory(App\Subcategory::class)->create()->id;
+        }
+    ];
+});
